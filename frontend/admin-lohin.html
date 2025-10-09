@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Loan Fraud Detection</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Optional: You can move this to style.css */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-card {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 350px;
+    }
+
+    h2 {
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      padding: 10px 0;
+      width: 100%;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #357ae8;
+    }
+
+    .error {
+      color: #e63946;
+      margin-top: 10px;
+      display: none;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <h2>Admin Login</h2>
+    <input type="password" id="adminPassword" placeholder="Enter Password" required>
+    <button onclick="loginAdmin()">Login</button>
+    <p id="errorMsg" class="error">Incorrect password. Try again.</p>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "LoanSecure123";
+
+    function loginAdmin() {
+      const input = document.getElementById('adminPassword').value.trim();
+      const error = document.getElementById('errorMsg');
+
+      if (input === ADMIN_PASSWORD) {
+        localStorage.setItem('adminLoggedIn', 'true');
+        window.location.href = "dashboard.html";
+      } else {
+        error.style.display = 'block';
+      }
+    }
+
+    // If already logged in, skip login page
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+      window.location.href = "dashboard.html";
+    }
+  </script>
+</body>
+</html>
