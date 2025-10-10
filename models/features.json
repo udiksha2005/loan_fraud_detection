@@ -1,0 +1,1 @@
+["loan_amount", "tuition_amount", "annual_income", "cosigner_income", "loan_over_tuition", "loan_to_income", "excess_amount", "flag_loan_gt_1_5x_tuition", "typing_speed", "avg_keypress_interval", "hesitation_time", "mouse_variance", "same_device_count", "same_ip_count", "num_apps_last_30_days", "hour_of_day", "is_night_submission", "rule_score"]
