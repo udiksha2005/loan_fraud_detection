@@ -6,6 +6,12 @@ from datetime import datetime
 from database import get_db, LoanApplication
 from joblib import load
 import traceback
+from fastapi.middleware.cors import CORSMiddleware
+import numpy as np
+import pandas as pd
+import os
+
+
 
 app = FastAPI(title="Loan Fraud Detection API (Logistic Regression)")
 
@@ -26,6 +32,11 @@ class LoanData(BaseModel):
     loan_amount: PositiveFloat
     purpose: str
 
+    typing_speed: float | None = None
+    avg_keypress_interval: float | None = None
+    hesitation_time: float | None = None
+    mouse_variance: float | None = None
+
 # -------------------------------
 # Root route
 # -------------------------------
@@ -41,11 +52,17 @@ def submit_loan(data: LoanData, db: Session = Depends(get_db)):
     try:
         # Prepare input
         input_dict = {
-            "age": [data.age],
-            "income": [data.income],
-            "loan_amount": [data.loan_amount],
-            "purpose": [data.purpose]
-        }
+    "age": [data.age],
+    "income": [data.income],
+    "loan_amount": [data.loan_amount],
+    "purpose": [data.purpose],
+    # ---- Behavioral features (from frontend) ----
+    "typing_speed": [data.typing_speed if data.typing_speed is not None else 0],
+    "avg_keypress_interval": [data.avg_keypress_interval if data.avg_keypress_interval is not None else 0],
+    "hesitation_time": [data.hesitation_time if data.hesitation_time is not None else 0],
+    "mouse_variance": [data.mouse_variance if data.mouse_variance is not None else 0]
+}
+
 
         import pandas as pd # type: ignore
         X_new = pd.DataFrame(input_dict)

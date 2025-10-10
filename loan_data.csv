@@ -1,13 +1,14 @@
-name,age,income,loan_amount,purpose,fraud
-Alex,23,10000,5000,Personal,0
-Bob,45,20000,15000,Car Loan,1
-Cathy,34,15000,7000,Home Loan,0
-David,29,12000,6000,Education,0
-Eva,50,25000,20000,Personal,1
-Frank,40,18000,12000,Car Loan,0
-Grace,35,16000,8000,Home Loan,0
-Hannah,28,11000,5000,Education,0
-Ivan,55,30000,25000,Personal,1
-Julia,30,14000,7000,Car Loan,0
+name,age,income,loan_amount,tuition_amount,purpose,is_fraud,typing_speed,avg_keypress_interval,hesitation_time,mouse_variance,same_device_count,same_ip_count,num_apps_last_30_days
+
+Alex,23,10000,5000,2000,Personal,0,5.5,100,0.2,0.5,1,1,0
+Bob,45,20000,15000,5000,Car Loan,1,9.0,45,0.1,0.1,2,3,2
+Cathy,34,15000,7000,6000,Home Loan,0,9.0,45,0.1,0.1,2,3,2
+David,29,12000,6000,4000,Education,0,9.0,45,0.1,0.1,2,3,2
+Eva,50,25000,20000,30000,Personal,1,5.5,100,0.2,0.5,1,1,0
+Frank,40,18000,12000,2500000,Car Loan,0,9.0,45,0.1,0.1,2,3,2
+Grace,35,16000,8000,3000000,Home Loan,0,5.5,100,0.2,0.5,1,1,0
+Hannah,28,11000,5000,200000,Education,0,9.0,45,0.1,0.1,2,3,2
+Ivan,55,30000,25000,30000,Personal,1,5.5,100,0.2,0.5,1,1,0
+Julia,30,14000,7000,10000,Car Loan,0,9.0,45,0.1,0.1,2,3,2
 
 

@@ -1,0 +1,16 @@
+{
+  "name": "TestUser",
+  "age": 25,
+  "income": 12000,
+  "loan_amount": 6000,
+  "purpose": "Personal",
+  "tuition_amount": 5000,
+  "cosigner_income": 0,
+  "typing_speed": 5,
+  "avg_keypress_interval": 200,
+  "hesitation_time": 50,
+  "mouse_variance": 0.3,
+  "same_device_count": 1,
+  "same_ip_count": 1,
+  "num_apps_last_30_days": 0
+}
