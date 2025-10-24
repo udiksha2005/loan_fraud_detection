@@ -20,6 +20,8 @@ class LoanApplication(Base):
     income = Column(Float)
     loan_amount = Column(Float)
     purpose = Column(String)
+    email = Column(String, unique=True, index=True)
+    phone = Column(String, unique=True, index=True)
     fraud_probability = Column(Float)
     prediction = Column(String)
     fraud_score = Column(Float, nullable=True)

@@ -213,6 +213,7 @@ tbody tr:hover { background: #f8f9fa; }
           <th>Name</th>
           <th>College</th>
           <th>College ID</th>
+          <th>Email</th>
           <th>Loan Amount</th>
           <th>Monthly Income / Family Income</th>
           <th>Income Proof Provided</th>
@@ -271,11 +272,12 @@ function renderDashboard() {
       const row = document.createElement('tr');
       const statusClass = a.status === "Approved" ? "status-approved" : 
                          a.status === "Pending" ? "status-pending" : "status-high-risk";
-      
       row.innerHTML = `
         <td><strong>${a.name}</strong></td>
         <td>${a.college}</td>
-        <td>${a.college_id}</td>
+        <td>${a.college_id || ''}</td>
+        <td>${a.phone || ''}</td>
+        <td>${a.email || ''}</td>
         <td>₹${a.loan_amount.toLocaleString()}</td>
         <td>₹${a.income.toLocaleString()}</td>
         <td>${a.income_proof}</td>

@@ -2,87 +2,190 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LoanSecure – Student Loan Application</title>
-  <!-- Link to external CSS -->
   <link rel="stylesheet" href="style.css">
-  <!--<style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    header { text-align: center; margin-bottom: 30px; }
-    section { margin-bottom: 30px; }
-    input, select { width: 100%; padding: 5px; margin-bottom: 10px; }
-    label { display: block; font-weight: bold; margin-top: 10px; }
-    button { padding: 10px 20px; font-size: 16px; }
-    span[title] { cursor: help; }
-  </style>-->
-
 </head>
 <body>
+  
+  <div class="container">
+    <header class="form-header">
+      <h1>EDUFraud</h1>
+      <p>Student Loan Risk Analyzer</p>
+    </header>
 
-  <header>
-    <h1>EDUFraud – Student Loan Risk Analyzer</h1>
-  </header>
+    <div class="form-container">
+      <h2 class="section-title">Student Loan Application</h2>
+      <form id="applicationForm" class="vertical-form">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+        </div>
 
-  <section id="loan-form">
-    <h2>Student Loan Application</h2>
-    <form id="applicationForm"class="vertical-form">
-      <label for="name">Full Name</label>
-      <input type="text" id="name" required>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" class="form-control" placeholder="Enter your age" required>
+        </div>
 
-      <label for="age">Age</label>
-      <input type="number" id="age" required>
+        <div class="form-group">
+          <label for="college">College</label>
+          <input type="text" id="college" class="form-control" placeholder="Enter your college name" required>
+        </div>
 
-      <label for="college">College</label>
-      <input type="text" id="college" required>
+        <div class="form-group">
+          <label for="course_name">Course Name</label>
+          <input type="text" id="course_name" class="form-control" placeholder="Enter your course name" required>
+        </div>
 
-      <label for="college_id">College ID</label>
-      <input type="text" id="college_id" required>
-      <span title="Enter your official college ID issued by your college">ℹ️</span>
+        <div class="form-group">
+          <label for="region">Region of Study</label>
+          <select id="region" class="form-control" required>
+            <option value="India">India</option>
+            <option value="Abroad">Abroad</option>
+          </select>
+        </div>
 
-      <label for="loan_amount">Loan Amount (₹)</label>
-      <input type="number" id="loan_amount" required>
+        <div class="form-group">
+          <label for="tuition_fee">Tuition Fee (₹)</label>
+          <input type="text" id="tuition_fee" class="form-control" placeholder="Enter annual tuition fee" required oninput="formatIndianNumber(this)">
+        </div>
 
-      <label for="income">Monthly Income / Family Income (₹)</label>
-      <input type="number" id="income" required>
+        <div class="form-group">
+          <label for="loan_amount">Loan Amount (₹)</label>
+          <input type="text" id="loan_amount" class="form-control" placeholder="Enter loan amount" required oninput="formatIndianNumber(this)">
+        </div>
 
-      <label for="income_proof">Income Proof Provided</label>
-      <select id="income_proof" required>
-        <option value="">--Select--</option>
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-      </select>
+        <div class="form-group">
+          <label for="income">Monthly Income / Family Income (₹)</label>
+          <input type="text" id="income" class="form-control" placeholder="Enter monthly or family income" required oninput="formatIndianNumber(this)">
+        </div>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" required>
+        <div class="form-group">
+          <label for="income_proof">Income Proof Provided</label>
+          <select id="income_proof" class="form-control" required>
+            <option value="">--Select--</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
 
-      <label for="phone">Phone</label>
-      <input type="text" id="phone" required>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+        </div>
 
-      <label for="purpose">Purpose of Loan</label>
-      <select id="purpose" required>
-        <option>Tuition</option>
-        <option>Books</option>
-        <option>Living Expenses</option>
-        <option>Other</option>
-      </select>
+        <div class="form-group">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" class="form-control" placeholder="Enter 10-digit phone number" required>
+        </div>
 
-      <button type="submit">Submit Application</button>
-    </form>
-  </section>
+        <div class="form-group">
+          <label for="purpose">Purpose of Loan</label>
+          <select id="purpose" class="form-control" required>
+            <option value="">--Select Purpose--</option>
+            <option value="tuition_fee">Tuition Fee</option>
+            <option value="living_expenses">Living Expenses</option>
+            <option value="study_equipment">Study Equipment</option>
+            <option value="tuition_and_living_expenses">Tuition and Living Expenses</option>
+          </select>
+        </div>
 
-  <section id="result"></section>
+        <!-- Hidden behavioral fields -->
+        <input type="hidden" id="typing_speed" value="0">
+        <input type="hidden" id="avg_keypress_interval" value="0">
+        <input type="hidden" id="hesitation_time" value="0">
+        <input type="hidden" id="mouse_variance" value="0">
 
+          
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit Application</button>
+        </div>
+      </form>
+      <div id="result" class="result-section"></div>
+        <script>
+        // Format number as per Indian digit grouping
+        function formatIndianNumber(input) {
+          let value = input.value.replace(/,/g, '');
+          if (!value) {
+            input.value = '';
+            return;
+          }
+          let num = parseInt(value.replace(/\D/g, ''));
+          if (isNaN(num)) {
+            input.value = '';
+            return;
+          }
+          let numStr = num.toString();
+          let lastThree = numStr.substring(numStr.length - 3);
+          let otherNumbers = numStr.substring(0, numStr.length - 3);
+          if (otherNumbers !== '')
+            lastThree = ',' + lastThree;
+          let formatted = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+          input.value = formatted;
+        }
+        </script>
+      </form>
   <script>
-    const form = document.getElementById('applicationForm');
-    const resultSection = document.getElementById('result');
+  const form = document.getElementById('applicationForm');
+  const resultSection = document.getElementById('result');
+    
+    // Behavioral backtracking log
+    let behaviorLog = [];
+    
+    // Track focus, blur, and input for all form fields
+    const formElements = document.querySelectorAll("#applicationForm input, #applicationForm select");
+    formElements.forEach(el => {
+      // Focus event
+      el.addEventListener("focus", (e) => {
+        behaviorLog.push({
+          field: e.target.id,
+          action: "focus",
+          time: new Date().toISOString()
+        });
+      });
+      
+      // Blur event
+      el.addEventListener("blur", (e) => {
+        behaviorLog.push({
+          field: e.target.id,
+          action: "blur",
+          value: e.target.value,
+          time: new Date().toISOString()
+        });
+      });
+      
+      // Input/change event
+      el.addEventListener("input", (e) => {
+        behaviorLog.push({
+          field: e.target.id,
+          action: "input",
+          value: e.target.value,
+          time: new Date().toISOString()
+        });
+      });
+    });
 
+    // Fallback fraud calculation (if backend is unavailable)
     function calculateFraudScore(data) {
       let score = 0;
       const reasons = [];
 
-      if(data.loan_amount > data.income * 5) { score += 40; reasons.push("Loan amount is very high compared to income"); }
-      if(data.income_proof === "No") { score += 30; reasons.push("No income proof provided"); }
-      if(data.age < 18) { score += 20; reasons.push("Applicant is under 18"); }
-      if(!data.college_id) { score += 10; reasons.push("College ID missing"); }
+      if(data.loan_amount > data.income * 5) { 
+        score += 40; 
+        reasons.push("Loan amount is very high compared to income"); 
+      }
+      if(data.income_proof === "No") { 
+        score += 30; 
+        reasons.push("No income proof provided"); 
+      }
+      if(data.age < 18) { 
+        score += 20; 
+        reasons.push("Applicant is under 18"); 
+      }
+      if(data.loan_amount > data.tuition_fee * 2) {
+        score += 15;
+        reasons.push("Loan amount is significantly higher than tuition fee");
+      }
       if(score > 100) score = 100;
 
       let status = "";
@@ -92,103 +195,122 @@
 
       return {score, status, reasons};
     }
-
-    /*form.addEventListener('submit', function(e) {
+    
+    // Form submission
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-
+      
+      // Get form data
       const formData = {
-        name: document.getElementById('name').value,
+        name: document.getElementById('name').value.trim(),
         age: parseInt(document.getElementById('age').value),
-        college: document.getElementById('college').value,
-        college_id: document.getElementById('college_id').value,
-        loan_amount: parseInt(document.getElementById('loan_amount').value),
-        income: parseInt(document.getElementById('income').value),
+        college: document.getElementById('college').value.trim(),
+        course_name: document.getElementById('course_name').value.trim(),
+        region: document.getElementById('region').value,
+        tuition_fee: parseInt(document.getElementById('tuition_fee').value.replace(/,/g, '')),
+        loan_amount: parseInt(document.getElementById('loan_amount').value.replace(/,/g, '')),
+        income: parseInt(document.getElementById('income').value.replace(/,/g, '')),
         income_proof: document.getElementById('income_proof').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        purpose: document.getElementById('purpose').value
+        email: document.getElementById('email').value.trim(),
+        phone: document.getElementById('phone').value.trim(),
+        purpose: document.getElementById('purpose').value,
+        // Optional behavioral features
+        typing_speed: parseFloat(document.getElementById('typing_speed')?.value) || 0,
+        avg_keypress_interval: parseFloat(document.getElementById('avg_keypress_interval')?.value) || 0,
+        hesitation_time: parseFloat(document.getElementById('hesitation_time')?.value) || 0,
+        mouse_variance: parseFloat(document.getElementById('mouse_variance')?.value) || 0
       };
 
-      const result = calculateFraudScore(formData);
+      // ===== Validation =====
+      const errors = [];
 
+      if(!/^[a-zA-Z\s]+$/.test(formData.name)) errors.push("Name must contain only letters.");
+      if(isNaN(formData.age) || formData.age < 18 || formData.age > 60) errors.push("Age must be between 18 and 60.");
+      if(formData.college === "") errors.push("College is required.");
+      if(isNaN(formData.tuition_fee) || formData.tuition_fee <= 0) errors.push("Tuition fee must be a positive number.");
+      if(isNaN(formData.loan_amount) || formData.loan_amount <= 0) errors.push("Loan amount must be a positive number.");
+      if(isNaN(formData.income) || formData.income <= 0) errors.push("Income must be a positive number.");
+      if(!["Yes","No"].includes(formData.income_proof)) errors.push("Income proof selection is required.");
+      if(!/^\S+@\S+\.\S+$/.test(formData.email)) errors.push("Enter a valid email.");
+      if(!/^\d{10}$/.test(formData.phone)) errors.push("Phone must be 10 digits.");
+  if(!["tuition_fee","living_expenses","study_equipment","tuition_and_living_expenses"].includes(formData.purpose)) errors.push("Purpose is required.");
 
+      if(errors.length > 0) {
+        alert("Please fix the following errors:\n\n" + errors.join("\n"));
+        return;
+      }
 
-      // Display result
+      try {
+        // Try calling backend API for fraud score
+        const response = await fetch("http://localhost:8000/apply-loan-frontend", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData)
+        });
+        if (!response.ok) {
+          throw new Error("Backend returned error status");
+        }
+        const result = await response.json();
+        // Display result
+        displayResult(result, formData);
+      } catch (error) {
+        console.error("Backend unavailable, using local calculation:", error);
+        resultSection.innerHTML = `<div class="result-content"><p style="color:red">Backend not reachable. Showing local risk analysis only.</p></div>`;
+        // Fallback to local calculation
+        const result = calculateFraudScore(formData);
+        result.fraud_score = result.score;
+        displayResult(result, formData);
+      }
+    });
+
+    function displayResult(result, formData) {
+      // Display result with styling
+      const statusClass = result.status === "Approved" ? "status-approved" : 
+                         result.status === "Pending" ? "status-review" : "status-risk";
+      
       resultSection.innerHTML = `
-        <h2>Application Result</h2>
-        <p><strong>Fraud Score:</strong> ${result.score}%</p>
-        <p><strong>Status:</strong> ${result.status}</p>
-        <p><strong>Reasons:</strong> ${result.reasons.join(", ") || "None"}</p>
+        <div class="form-container">
+          <h2 class="section-title">Application Result</h2>
+          <div class="result-content">
+            <div class="result-item">
+              <span class="result-label">Fraud Score</span>
+              <span class="score-value">${result.fraud_score || result.score}%</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Status</span>
+              <span class="result-value ${statusClass}">${result.status}</span>
+            </div>
+            <div class="result-item reasons-section">
+              <span class="result-label">Analysis Reasons</span>
+              <ul class="reasons-list">
+                ${(result.reasons && result.reasons.length > 0) 
+                  ? result.reasons.map(r => `<li>${r}</li>`).join('') 
+                  : '<li>No specific concerns identified</li>'}
+              </ul>
+            </div>
+          </div>
+        </div>
       `;
 
-      // Save to localStorage
+      // Save to localStorage with behavioral log
       let applications = JSON.parse(localStorage.getItem('applications')) || [];
-      applications.push({...formData, fraud_score: result.score, status: result.status, reasons: result.reasons.join(", ")});
+      applications.push({
+        ...formData,
+        fraud_score: result.fraud_score || result.score,
+        status: result.status,
+        reasons: Array.isArray(result.reasons) ? result.reasons.join(", ") : result.reasons || "None",
+        behaviorLog: behaviorLog,
+        timestamp: new Date().toISOString()
+      });
       localStorage.setItem('applications', JSON.stringify(applications));
 
+      // Reset form and behavior log
       form.reset();
-    });  */
-    form.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  // Get form data
-  const formData = {
-    name: document.getElementById('name').value.trim(),
-    age: parseInt(document.getElementById('age').value),
-    college: document.getElementById('college').value.trim(),
-    college_id: document.getElementById('college_id').value.trim(),
-    loan_amount: parseInt(document.getElementById('loan_amount').value),
-    income: parseInt(document.getElementById('income').value),
-    income_proof: document.getElementById('income_proof').value,
-    email: document.getElementById('email').value.trim(),
-    phone: document.getElementById('phone').value.trim(),
-    purpose: document.getElementById('purpose').value
-  };
-
-  // ===== Validation =====
-  const errors = [];
-
-  if(!/^[a-zA-Z\s]+$/.test(formData.name)) errors.push("Name must contain only letters.");
-  if(isNaN(formData.age) || formData.age < 18 || formData.age > 60) errors.push("Age must be between 18 and 60.");
-  if(formData.college === "") errors.push("College is required.");
-  if(!/^[a-zA-Z0-9]+$/.test(formData.college_id)) errors.push("College ID must be alphanumeric.");
-  if(isNaN(formData.loan_amount) || formData.loan_amount <= 0) errors.push("Loan amount must be a positive number.");
-  if(isNaN(formData.income) || formData.income <= 0) errors.push("Income must be a positive number.");
-  if(!["Yes","No"].includes(formData.income_proof)) errors.push("Income proof selection is required.");
-  if(!/^\S+@\S+\.\S+$/.test(formData.email)) errors.push("Enter a valid email.");
-  if(!/^\d{10}$/.test(formData.phone)) errors.push("Phone must be 10 digits.");
-  if(!["Tuition","Books","Living Expenses","Other"].includes(formData.purpose)) errors.push("Purpose is required.");
-
-  if(errors.length > 0) {
-    alert("Please fix the following errors:\n\n" + errors.join("\n"));
-    return;
-  }
-
-  // ===== If validation passed, calculate fraud score =====
-  const result = calculateFraudScore(formData);
-
-  // Save sanitized & validated data to localStorage
-  let applications = JSON.parse(localStorage.getItem('applications')) || [];
-  applications.push({
-    ...formData,
-    fraud_score: result.score,
-    status: result.status,
-    reasons: result.reasons.join(", ")
-  });
-  localStorage.setItem('applications', JSON.stringify(applications));
-
-  // Display result
-  resultSection.innerHTML = `
-    <h2>Application Result</h2>
-    <p><strong>Fraud Score:</strong> ${result.score}%</p>
-    <p><strong>Status:</strong> ${result.status}</p>
-    <p><strong>Reasons:</strong> ${result.reasons.join(", ") || "None"}</p>
-  `;
-
-  form.reset();
-});
-
+      behaviorLog = [];
+      
+      // Scroll to result
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
   </script>
-
 </body>
-</html>s
+</html>

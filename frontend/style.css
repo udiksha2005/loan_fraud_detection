@@ -128,11 +128,11 @@ body::before {
   z-index: 1;
 }
 
-/* ===== Header ===== */
+/* ===== Header - FIXED PADDING ===== */
 .form-header {
   text-align: center;
   margin-bottom: 60px;
-  padding: 70px 640px;
+  padding: 70px 40px;  /* FIXED: Was 640px, now 40px */
   background: var(--gradient-flower);
   color: white;
   border-radius: 30px;
